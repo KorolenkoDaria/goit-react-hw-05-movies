@@ -6,3 +6,8 @@ export const StyledUl = styled.ul`
     gap: 20px;
     flex-wrap: wrap;
 `
+
+export const StyledH2 = styled.h2`
+    text-align: center;
+    font-size: 38px;
+`

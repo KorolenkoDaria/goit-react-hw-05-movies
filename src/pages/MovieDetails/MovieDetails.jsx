@@ -1,8 +1,8 @@
 import { fetchMovieById } from "servisce/api";
 
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 
-import { useParams, Routes, Route, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation, Link, Outlet } from "react-router-dom";
 
 import MovieCard from "components/MovieCard/MovieCard";
 import GoBackButton from "components/GoBackButton/GoBackButton";
@@ -11,8 +11,6 @@ import Loader from "components/Loader/Loader";
 
 import { StyledSection, StyledButtonDiv, StyledNavLink, StyledNavLinkWrapper, StyledH2 } from "./MovieDetails.styled";
 
-const Cast = lazy(() => import("pages/Cast"));
-const Reviews = lazy(() => import("pages/Reviews"));
 
 
 const MovieDetails = () => {
@@ -61,14 +59,8 @@ const MovieDetails = () => {
                     <StyledNavLink to="cast">Cast</StyledNavLink>
                     <StyledNavLink to="reviews">Reviews</StyledNavLink>
                 </StyledNavLinkWrapper>
+                <Suspense fallback={<div>Loading...</div>}>{<Outlet />}</Suspense>
             </Container>}
-
-            <Suspense fallback={<Loader />}>
-                <Routes>
-                    <Route path="cast" element={<Cast />} />
-                    <Route path="reviews" element={<Reviews />} />
-                </Routes>
-            </Suspense>
         </>
 
     )

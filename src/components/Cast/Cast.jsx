@@ -1,4 +1,4 @@
-import { fetchCastById } from "../servisce/api";
+import { fetchCastById } from "../../servisce/api";
 
 import { useState, useEffect } from "react";
 
@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 
 import CastList from "components/CastList/CastList";
 import Loader from "components/Loader/Loader";
+
+import { StyledH2 } from "./Cast.styled";
 
 const Cast = () => {
     const { movieId } = useParams();
@@ -24,19 +26,15 @@ const Cast = () => {
             } finally {
                 setLoader(false);
             }
-
-
         }
         fetchCast();
     }, [movieId]);
-
     const { cast } = characters;
-
     return (
         <>
             {loader && <Loader />}
-            <CastList cast={cast} />
+            {characters.cast && characters.cast.length === 0 ? <StyledH2>Cast is not found!</StyledH2> : <CastList cast={cast} />}
         </>
     )
 }
-export default Cast; 
+export default Cast;    

@@ -8,6 +8,8 @@ import ReviewsList from "components/ReviewsList/ReviewsList";
 import Container from "components/Container/Container";
 import Loader from "components/Loader/Loader";
 
+import { StyledH2 } from "./Reviews.styled";
+
 const Reviews = () => {
     const { movieId } = useParams();
     const [reviewData, setReviewData] = useState();
@@ -29,10 +31,11 @@ const Reviews = () => {
         }
         fetchReviews();
     }, [movieId]);
+
     return (
         <Container>
             {loader && <Loader />}
-            <ReviewsList review={reviewData}></ReviewsList>
+            {reviewData && reviewData.results.length === 0 ? <StyledH2>Reviews is not found!</StyledH2> : <ReviewsList review={reviewData}></ReviewsList>}
         </Container>
     )
 }
